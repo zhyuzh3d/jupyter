@@ -1,4 +1,4 @@
-#cell-1
+#cell-1 设置参数
 
 url = 'https://www.jianshu.com/u/ae784c57b353'
 params = {'order_by': 'shared_at', 'page': '1'}
@@ -16,7 +16,7 @@ Cookie: read_mode=day; default_font=font2; locale=zh-CN; ......b9fb068=153870501
 If-None-Match: W/"31291dc679ccd08938f27b1811f8b263"
 '''
 
-#cell-2
+#cell-2 转化headers
 
 def str2obj(s, s1=';', s2='='):
     li = s.split(s1)
@@ -30,7 +30,7 @@ def str2obj(s, s1=';', s2='='):
 
 headers = str2obj(headers, '\n', ': ')
 
-# cell-3
+# cell-3 发送整体请求，获取基本信息、文章总数
 
 import requests
 from bs4 import BeautifulSoup
@@ -45,8 +45,7 @@ alike = soup.find('div', 'info').find_all('div','meta-block')[4].find('p').strin
 acount=int(acount)
 print('>>文章总数', acount)
 
-#cell-4
-
+#cell-4 循环获取每一页数据
 
 import math
 import time
@@ -74,7 +73,7 @@ for n in range(1, pages + 1):
     time.sleep(1)
 
 
-#cell-5
+#cell-5 存储文章数据新文件
 
 tm = str(int(time.time()))
 fname = './data/articles_' + tm + '.csv'
@@ -82,7 +81,7 @@ with open(fname, 'w', encoding="gb18030") as f:
     f.write('\n'.join(data))
     f.close()
 
-#cell-6
+#cell-6 增量存储基础信息
 
 from os.path import exists
 alabels = ['time', 'focus', 'funs', 'articles', 'words', 'like', 'read']
@@ -96,7 +95,7 @@ with open(afname, 'a', encoding="gb18030") as f:
     f.write(','.join(adata)+'\n')
     f.close()
 
-#cll-7
+#cll-7 提示完成
 
 print('>>完成，保存在%s'%fname)
 
